@@ -28,10 +28,8 @@ namespace Euro_diffusion
             Yh = position[3];
             Cities = new List<City>();
             for (int i = Xl; i <= Xh; i++)
-            {
                 for (int j = Yl; j <= Yh; j++)
                     Cities.Add(new City(Name, i, j));
-            }
             CompleteCitiesCount = 0;
         }
 

@@ -23,6 +23,7 @@ namespace Euro_diffusion
             Y = y;
             Balance = initialBalance;
             CachedIncome = 0;
+            Neighbors = new List<City>();
         }
 
         public bool IsEmpty()

@@ -20,7 +20,7 @@ namespace Euro_diffusion
 
         public Europe()
         {
-            Map = new int[10, 10];
+            Map = new int[12, 12];
             ConsoleReader();
         }
 
@@ -44,6 +44,7 @@ namespace Euro_diffusion
                 if (CheckNewCountry(country))
                     AddCountry(country);
             }
+            SetNeighbors();
         }
 
         private bool CountryInputParser(String[] str)
@@ -115,15 +116,52 @@ namespace Euro_diffusion
         {
             for (int i = country.Xl; i <= country.Xh; i++)
             {
-                if (Map[i, country.Yl] == 1 || Map[i, country.Yh] == 1)
-                    return false;
-            }
-            for (int i = country.Yl + 1; i < country.Yh; i++)
-            {
-                if (Map[country.Xl, i] == 1 || Map[country.Xh, i] == 1)
-                    return false;
+                for (int j = country.Yl; j <= country.Yh; j++)
+                {
+                    if (Map[i, j] == 1)
+                        return false;
+                }
             }
             return true;
+        }
+
+        private void SetNeighbors()
+        {
+            foreach (Country country in CountryList)
+            {
+                foreach (City city in country.Cities)
+                {
+                    if (Map[city.X, city.Y] == 1)
+                    {
+                        if (Map[city.X, city.Y + 1] == 1)
+                            city.Neighbors.Add(GetCity(city.X, city.Y + 1));
+                        if (Map[city.X + 1, city.Y] == 1)
+                            city.Neighbors.Add(GetCity(city.X + 1, city.Y));
+                        if (Map[city.X, city.Y - 1] == 1)
+                            city.Neighbors.Add(GetCity(city.X, city.Y - 1));
+                        if (Map[city.X - 1, city.Y] == 1)
+                            city.Neighbors.Add(GetCity(city.X + 1, city.Y));
+                    }
+                }
+            }
+        }
+
+        public City GetCity(int x, int y)
+        {
+            foreach (Country country in CountryList)
+            {
+                if (country.Xl <= x && country.Yh >= y)
+                {
+                    foreach (City city in country.Cities)
+                    {
+                        if (city.X == x && city.Y == y)
+                        {
+                            return city;
+                        }
+                    }
+                }
+            }
+            return null;
         }
     }
 }
