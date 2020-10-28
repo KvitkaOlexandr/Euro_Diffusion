@@ -59,10 +59,9 @@ namespace Euro_diffusion
                 CompletionDay = day;
         }
 
-        public void SetInitialBalance(int initialBalance)
+        public String Result()
         {
-            foreach (var city in Cities)
-                city.Balance = initialBalance;
+            return $"{Name} {CompletionDay}";
         }
     }
 }

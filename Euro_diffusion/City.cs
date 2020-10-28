@@ -12,8 +12,8 @@ namespace Euro_diffusion
         public String Country;
         public int X;
         public int Y;
-        public int Balance;
-        public int CachedIncome;
+        public Dictionary<String, Money> Balance;
+        public Dictionary<String, Money> CachedIncome;
         public List<City> Neighbors;
 
         public City(String country, int x, int y, int initialBalance = INITIAL_BALANCE)
@@ -21,25 +21,51 @@ namespace Euro_diffusion
             Country = country;
             X = x;
             Y = y;
-            Balance = initialBalance;
-            CachedIncome = 0;
+            Balance = new Dictionary<String, Money>
+            {
+                { country, new Money(initialBalance) }
+            };
+            CachedIncome = new Dictionary<String, Money>();
             Neighbors = new List<City>();
         }
 
-        public bool IsEmpty()
+        public void AddIncome(int amount, String country)
         {
-            return Balance == 0 && CachedIncome == 0;
-        }
-
-        public void AddIncome(int amount)
-        {
-            CachedIncome += amount;
+            if (CachedIncome.ContainsKey(country))
+                CachedIncome[country].MoneyValue += amount;
+            else
+                CachedIncome.Add(country, new Money(amount));
         }
 
         public void UpdateBalance()
         {
-            Balance += CachedIncome;
-            CachedIncome = 0;
+            foreach (KeyValuePair<String, Money> currency in CachedIncome)
+            {
+                if (Balance.ContainsKey(currency.Key))
+                    Balance[currency.Key].MoneyValue += currency.Value.MoneyValue;
+                else
+                    Balance.Add(currency.Key, currency.Value);
+            }
+            CachedIncome.Clear();
+        }
+
+        public void PayBills()
+        {
+            foreach (KeyValuePair<String, Money> currency in Balance)
+            {
+                if (currency.Value.MoneyValue > PAY_PERCENT)
+                {
+                    int bill = currency.Value.MoneyValue / PAY_PERCENT;
+                    if (bill != 0)
+                    {
+                        foreach (City neighbor in Neighbors)
+                        {
+                            currency.Value.MoneyValue -= bill;
+                            neighbor.AddIncome(bill, Country);
+                        }
+                    }
+                }
+            }
         }
     }
 }

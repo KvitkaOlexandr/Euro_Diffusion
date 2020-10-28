@@ -7,9 +7,8 @@ namespace Euro_diffusion
     {
         static void Main(string[] args)
         {
-            var europe = new Europe();
-            foreach (var country in europe.CountryList)
-                Console.WriteLine(country.ToString());
+            var simulator = new Simulator();
+            simulator.Start();
         }
     }
 }

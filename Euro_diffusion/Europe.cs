@@ -17,11 +17,13 @@ namespace Euro_diffusion
 
         public List<Country> CountryList;
         public int[,] Map;
+        public int CompliteCountriesCount;
 
         public Europe()
         {
             Map = new int[12, 12];
             ConsoleReader();
+            CompliteCountriesCount = 0;
         }
 
         private void ConsoleReader()
@@ -162,6 +164,12 @@ namespace Euro_diffusion
                 }
             }
             return null;
+        }
+
+        public void PrintResult()
+        {
+            foreach (Country country in CountryList)
+                Console.WriteLine(country.Result());
         }
     }
 }
