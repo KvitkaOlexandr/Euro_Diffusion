@@ -142,7 +142,7 @@ namespace Euro_diffusion
                         if (Map[city.X, city.Y - 1] == 1)
                             city.Neighbors.Add(GetCity(city.X, city.Y - 1));
                         if (Map[city.X - 1, city.Y] == 1)
-                            city.Neighbors.Add(GetCity(city.X + 1, city.Y));
+                            city.Neighbors.Add(GetCity(city.X - 1, city.Y));
                     }
                 }
             }
