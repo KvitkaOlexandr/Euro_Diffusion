@@ -16,30 +16,35 @@ namespace Euro_diffusion
         public void Start()
         {
             int days = 0;
-            while (Europe.CompliteCountriesCount != Europe.CountryList.Count)
+            if (Europe.CountryList.Count > 1)
             {
-                foreach (Country country in Europe.CountryList)
+                while (Europe.CompliteCountriesCount != Europe.CountryList.Count)
                 {
-                    foreach (City city in country.Cities)
+                    foreach (Country country in Europe.CountryList)
                     {
-                        city.PayBills();
+                        foreach (City city in country.Cities)
+                        {
+                            city.PayBills();
+                        }
                     }
-                }
-                foreach (Country country in Europe.CountryList)
-                {
-                    foreach (City city in country.Cities)
+                    foreach (Country country in Europe.CountryList)
                     {
-                        city.UpdateBalance();
-                        if (city.Balance.Count == Europe.CountryList.Count)
-                            country.CompleteCitiesCount++;
+                        foreach (City city in country.Cities)
+                        {
+                            city.UpdateBalance();
+                            if (city.Balance.Count == Europe.CountryList.Count)
+                                country.CompleteCitiesCount++;
+                        }
+                        if (country.CompleteCitiesCount == country.Cities.Count)
+                        {
+                            country.CompletionDay = days;
+                            Europe.CompliteCountriesCount++;
+                        }
                     }
-                    if (country.CompleteCitiesCount == country.Cities.Count)
-                    {
-                        country.CompletionDay = days;
-                        Europe.CompliteCountriesCount++;
-                    } 
                 }
             }
+            else 
+                Europe.CountryList[0].CompletionDay = 0;
             Europe.PrintResult();
         }
     }

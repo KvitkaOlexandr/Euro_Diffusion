@@ -7,7 +7,7 @@ namespace Euro_diffusion
     {
         private const int COORDINATES_COUNT = 4;
 
-        public String Name;
+        public string Name;
         public int Xl;
         public int Yl;
         public int Xh;
@@ -16,7 +16,7 @@ namespace Euro_diffusion
         public int CompleteCitiesCount;
         public int CompletionDay;
 
-        public Country(String name, List<int> position)
+        public Country(string name, List<int> position)
         {
             if (position.Count != COORDINATES_COUNT)
                 throw new ArgumentException($"Country should have {COORDINATES_COUNT} coordinates");
@@ -58,7 +58,7 @@ namespace Euro_diffusion
                 CompletionDay = day;
         }
 
-        public String Result()
+        public string Result()
         {
             return $"{Name} {CompletionDay}";
         }
