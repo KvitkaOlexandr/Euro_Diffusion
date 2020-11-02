@@ -8,9 +8,9 @@ namespace Euro_diffusion
     {
         public Europe Europe;
 
-        public Simulator()
+        public Simulator(List<string[]> countryArr)
         {
-            Europe = new Europe();
+            Europe = new Europe(countryArr);
         }
 
         public void Start()

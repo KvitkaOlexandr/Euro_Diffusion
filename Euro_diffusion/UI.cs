@@ -55,7 +55,7 @@ namespace Euro_diffusion
             return true;
         }
 
-        public static List<string> FileReader(string path = "/Test_files/test.txt")
+        public static List<string> FileReader(string path = "D:\\!Kvitka\\training\\Еuro_diffusion\\Euro_diffusion\\Euro_diffusion\\Test_files\\test.txt")
         {
             using StreamReader sr = new StreamReader(path, System.Text.Encoding.Default);
             var buffer = new List<string>();
@@ -65,9 +65,40 @@ namespace Euro_diffusion
             return buffer;
         }
 
-        public static List<string[]> BufferReader(List<string> buffer)
+        public static List<List<string[]>> BufferReader(List<string> buffer)
         {
+            var count = 0;
+            var europeList = new List<List<string[]>>();
+            while (count < buffer.Count)
+            {
+                var isNum = int.TryParse(buffer[count], out int countryNumber);
+                if (isNum && countryNumber <= Constants.MAX_COUNTRY_COUNT && countryNumber >= Constants.MIN_COUNTRY_COUNT)
+                {
+                    var countryList = new List<string[]>();
+                    for (int i = count + 1; i < count + countryNumber + 1; i++)
+                    {
+                        string[] countryString = buffer[i].Split(' ');
+                        if (CountryInputParser(countryString))
+                            countryList.Add(countryString);
+                    }
+                    count += countryNumber + 1;
+                    europeList.Add(countryList);
+                }
+                else
+                    count++;
+            }
+            return europeList;
+        }
 
+        public static int Mode()
+        {
+            Console.WriteLine("Choose test mode (1) or console mode (2)");
+            var modeString = int.TryParse(Console.ReadLine(), out int mode);
+            while (!modeString || mode < 1 || mode > 2)
+            {
+                modeString = int.TryParse(Console.ReadLine(), out mode);
+            }
+            return mode;
         }
     }
 }

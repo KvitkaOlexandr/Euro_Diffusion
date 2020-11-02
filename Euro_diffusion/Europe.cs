@@ -9,11 +9,10 @@ namespace Euro_diffusion
         public int[,] Map;
         public int CompliteCountriesCount;
 
-        public Europe()
+        public Europe(List<string[]> countryArr)
         {
             Map = new int[12, 12];
             CountryList = new List<Country>();
-            var countryArr = UI.ConsoleReader();
             foreach (var countryString in countryArr)
             {
                 Country country = StringToCountry(countryString);
