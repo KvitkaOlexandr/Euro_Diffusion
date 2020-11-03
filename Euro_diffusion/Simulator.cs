@@ -19,11 +19,11 @@ namespace Euro_diffusion
             if (Europe.CountryList.Count > 1)
             {
                 while (Europe.CompliteCountriesCount != Europe.CountryList.Count)
-                {
+                {                    
                     foreach (Country country in Europe.CountryList)
                     {
                         foreach (City city in country.Cities)
-                        {
+                        {  
                             city.PayBills();
                         }
                     }
@@ -32,19 +32,24 @@ namespace Euro_diffusion
                         foreach (City city in country.Cities)
                         {
                             city.UpdateBalance();
-                            if (city.Balance.Count == Europe.CountryList.Count)
+                            if (city.Balance.Count == Europe.CountryList.Count && city.CompletionDay == -1)
+                            {
+                                city.CompletionDay = days;
                                 country.CompleteCitiesCount++;
+                            }        
                         }
-                        if (country.CompleteCitiesCount == country.Cities.Count)
+                        if (country.CompleteCitiesCount == country.Cities.Count && country.CompletionDay == -1)
                         {
                             country.CompletionDay = days;
                             Europe.CompliteCountriesCount++;
                         }
                     }
+                    days++;
                 }
             }
             else 
                 Europe.CountryList[0].CompletionDay = 0;
+            Europe.Sort();
             Europe.PrintResult();
         }
     }

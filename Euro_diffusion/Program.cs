@@ -19,15 +19,17 @@ namespace Euro_diffusion
             var testCases = UI.BufferReader(UI.FileReader());
             for (int i = 0; i < testCases.Count; i++)
             {
-                Console.WriteLine($"Case Number {i}");
+                Console.WriteLine($"Case Number {i + 1}");
                 var test = new Simulator(testCases[i]);
                 test.Start();
+                Console.WriteLine("");
             }
         }
 
         public static void ConsoleMode()
         {
-            Console.WriteLine("");
+            var test = new Simulator(UI.ConsoleReader());
+            test.Start();
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Euro_diffusion
 {
@@ -15,6 +14,7 @@ namespace Euro_diffusion
         public Dictionary<string, Money> Balance;
         public Dictionary<string, Money> CachedIncome;
         public List<City> Neighbors;
+        public int CompletionDay;
 
         public City(string country, int x, int y, int initialBalance = INITIAL_BALANCE)
         {
@@ -27,6 +27,7 @@ namespace Euro_diffusion
             };
             CachedIncome = new Dictionary<string, Money>();
             Neighbors = new List<City>();
+            CompletionDay = -1;
         }
 
         public void AddIncome(int amount, string country)
@@ -56,16 +57,23 @@ namespace Euro_diffusion
                 if (currency.Value.MoneyValue > PAY_PERCENT)
                 {
                     int bill = currency.Value.MoneyValue / PAY_PERCENT;
-                    if (bill != 0)
+                    foreach (City neighbor in Neighbors)
                     {
-                        foreach (City neighbor in Neighbors)
-                        {
-                            currency.Value.MoneyValue -= bill;
-                            neighbor.AddIncome(bill, Country);
-                        }
+                        currency.Value.MoneyValue -= bill;
+                        neighbor.AddIncome(bill, currency.Key);
                     }
                 }
             }
+        }
+
+        public bool CheckNeighbors()
+        {
+            foreach (var city in Neighbors)
+            {
+                if (city.Country != Country)
+                    return true;
+            }
+            return false;
         }
     }
 }

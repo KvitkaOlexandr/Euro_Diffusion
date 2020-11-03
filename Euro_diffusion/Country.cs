@@ -30,6 +30,7 @@ namespace Euro_diffusion
                 for (int j = Yl; j <= Yh; j++)
                     Cities.Add(new City(Name, i, j));
             CompleteCitiesCount = 0;
+            CompletionDay = -1;
         }
 
         public override bool Equals(object obj)
@@ -61,6 +62,15 @@ namespace Euro_diffusion
         public string Result()
         {
             return $"{Name} {CompletionDay}";
+        }
+
+        public int CompareTo(object obj)
+        {
+            if (obj == null) return 1;
+            if (obj is Country otherTemperature)
+                return Name.CompareTo(otherTemperature.Name);
+            else
+                throw new ArgumentException("Object is not a Country");
         }
     }
 }

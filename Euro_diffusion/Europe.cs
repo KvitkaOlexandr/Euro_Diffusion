@@ -20,6 +20,7 @@ namespace Euro_diffusion
                     AddCountry(country);
             }
             SetNeighbors();
+            CheckNeighbors();
             CompliteCountriesCount = 0;
         }
 
@@ -112,6 +113,47 @@ namespace Euro_diffusion
                 }
             }
             return null;
+        }
+
+        public void CheckNeighbors()
+        {
+            var removable = new List<Country>();
+            var count = CountryList.Count;
+            foreach (var country in CountryList)
+            {
+                var hasNaighbors = false;
+                int i = country.Xl;
+                while (!hasNaighbors && i <= country.Xh)
+                {
+                    var city1 = GetCity(i, country.Yl);
+                    var city2 = GetCity(i, country.Yh);
+                    if (city1.CheckNeighbors() || city2.CheckNeighbors())
+                        hasNaighbors = true;
+                    i++;
+                }
+                i = country.Yl + 1;
+                while (!hasNaighbors && i <= country.Yh - 1)
+                {
+                    var city1 = GetCity(country.Xl, i);
+                    var city2 = GetCity(country.Xh, i);
+                    if (city1.CheckNeighbors() || city2.CheckNeighbors())
+                        hasNaighbors = true;
+                    i++;
+                }
+                if (!hasNaighbors && count > 1)
+                {
+                    Console.WriteLine($"{country.Name} has no neighbors");
+                    removable.Add(country);
+                    count--;
+                }
+            }
+            foreach (var country in removable)
+                CountryList.Remove(country);
+        }
+
+        public void Sort()
+        {
+            CountryList.Sort(new CountryComparer());
         }
 
         public void PrintResult()
