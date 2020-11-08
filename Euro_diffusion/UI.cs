@@ -55,7 +55,7 @@ namespace Euro_diffusion
             return true;
         }
 
-        public static List<string> FileReader(string path = "D:\\!Kvitka\\training\\Еuro_diffusion\\Euro_diffusion\\Euro_diffusion\\Test_files\\test.txt")
+        public static List<string> FileReader(string path = "D:\\Studing\\University\\!Магистратура\\Хицко\\Лабы\\Euro Diffusion\\Euro_Diffusion\\Euro_diffusion\\Test_files\\test.txt")
         {
             using StreamReader sr = new StreamReader(path, System.Text.Encoding.Default);
             var buffer = new List<string>();
