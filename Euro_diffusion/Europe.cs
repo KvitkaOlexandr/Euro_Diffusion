@@ -121,26 +121,26 @@ namespace Euro_diffusion
             var count = CountryList.Count;
             foreach (var country in CountryList)
             {
-                var hasNaighbors = false;
+                var hasNeighbors = false;
                 int i = country.Xl;
-                while (!hasNaighbors && i <= country.Xh)
+                while (!hasNeighbors && i <= country.Xh)
                 {
                     var city1 = GetCity(i, country.Yl);
                     var city2 = GetCity(i, country.Yh);
                     if (city1.CheckNeighbors() || city2.CheckNeighbors())
-                        hasNaighbors = true;
+                        hasNeighbors = true;
                     i++;
                 }
                 i = country.Yl + 1;
-                while (!hasNaighbors && i <= country.Yh - 1)
+                while (!hasNeighbors && i <= country.Yh - 1)
                 {
                     var city1 = GetCity(country.Xl, i);
                     var city2 = GetCity(country.Xh, i);
                     if (city1.CheckNeighbors() || city2.CheckNeighbors())
-                        hasNaighbors = true;
+                        hasNeighbors = true;
                     i++;
                 }
-                if (!hasNaighbors && count > 1)
+                if (!hasNeighbors && count > 1)
                 {
                     Console.WriteLine($"{country.Name} has no neighbors");
                     removable.Add(country);
