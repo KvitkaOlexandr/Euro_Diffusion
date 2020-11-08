@@ -48,7 +48,7 @@ namespace Euro_diffusion
                 }
             }
             else 
-                Europe.CountryList[0].CompletionDay = 0;
+                Europe.CountryList[0].CompletionDay = days;
             Europe.Sort();
             Europe.PrintResult();
         }
