@@ -6,11 +6,19 @@ namespace Euro_diffusion
 {
     public class Money
     {
-        public int MoneyValue;
+        public int Balance;
+        public int CachedIncome;
 
-        public Money(int moneyValue)
+        public Money(int startBalance, int cachedIncome)
         {
-            MoneyValue = moneyValue;
+            Balance = startBalance;
+            CachedIncome = cachedIncome;
+        }
+
+        public void Update()
+        {
+            Balance += CachedIncome;
+            CachedIncome = 0;
         }
     }
 }
