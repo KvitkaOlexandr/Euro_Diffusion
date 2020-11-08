@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Euro_diffusion
 {
-    public class Country
+    public class Country: IComparable
     {
         private const int COORDINATES_COUNT = 4;
 
@@ -67,8 +67,8 @@ namespace Euro_diffusion
         public int CompareTo(object obj)
         {
             if (obj == null) return 1;
-            if (obj is Country otherTemperature)
-                return Name.CompareTo(otherTemperature.Name);
+            if (obj is Country country)
+                return Name.CompareTo(country.Name);
             else
                 throw new ArgumentException("Object is not a Country");
         }
