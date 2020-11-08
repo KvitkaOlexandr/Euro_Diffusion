@@ -18,7 +18,7 @@ namespace Euro_diffusion
             int days = 0;
             if (Europe.CountryList.Count > 1)
             {
-                while (Europe.CompliteCountriesCount != Europe.CountryList.Count)
+                while (Europe.CompleteCountriesCount != Europe.CountryList.Count)
                 {                    
                     foreach (Country country in Europe.CountryList)
                     {
@@ -41,7 +41,7 @@ namespace Euro_diffusion
                         if (country.CompleteCitiesCount == country.Cities.Count && country.CompletionDay == -1)
                         {
                             country.CompletionDay = days;
-                            Europe.CompliteCountriesCount++;
+                            Europe.CompleteCountriesCount++;
                         }
                     }
                     days++;

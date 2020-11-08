@@ -7,7 +7,7 @@ namespace Euro_diffusion
     {
         public List<Country> CountryList;
         public int[,] Map;
-        public int CompliteCountriesCount;
+        public int CompleteCountriesCount;
 
         public Europe(List<string[]> countryArr)
         {
@@ -21,7 +21,7 @@ namespace Euro_diffusion
             }
             SetNeighbors();
             CheckNeighbors();
-            CompliteCountriesCount = 0;
+            CompleteCountriesCount = 0;
         }
 
         private void AddCountry(Country country)
