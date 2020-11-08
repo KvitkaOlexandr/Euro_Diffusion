@@ -12,5 +12,6 @@ namespace Euro_diffusion
         public const int MAX_COUNTRY_LENGTH = 25;
         public const int MIN_POS = 1;
         public const int MAX_POS = 10;
+        public const int GRID_SIZE = 12;
     }
 }

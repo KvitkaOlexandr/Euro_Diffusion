@@ -11,7 +11,7 @@ namespace Euro_diffusion
 
         public Europe(List<string[]> countryArr)
         {
-            Map = new int[12, 12];
+            Map = new int[Constants.GRID_SIZE, Constants.GRID_SIZE];
             CountryList = new List<Country>();
             foreach (var countryString in countryArr)
             {
