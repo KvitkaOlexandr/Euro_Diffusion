@@ -35,16 +35,11 @@ namespace Euro_diffusion
 
         public override bool Equals(object obj)
         {
-            if (obj is Country country)
-            {
-                if (Name.Equals(country.Name) &&
-                    Xl == country.Xl &&
-                    Yl == country.Yl &&
-                    Xh == country.Xh &&
-                    Yh == country.Yh)
-                    return true;
-            }
-            return false;
+            return obj is Country country && Name.Equals(country.Name) &&
+                Xl == country.Xl &&
+                Yl == country.Yl &&
+                Xh == country.Xh &&
+                Yh == country.Yh;
         }
 
         public override string ToString()
