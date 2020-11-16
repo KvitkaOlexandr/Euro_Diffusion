@@ -115,7 +115,7 @@ namespace Euro_diffusion
             return null;
         }
 
-        public void CheckNeighbors()
+        private void CheckNeighbors()
         {
             var removable = new List<Country>();
             var count = CountryList.Count;
