@@ -26,9 +26,7 @@ namespace Euro_diffusion
                     if (retval != 0)
                         return retval;
                     else
-                    {
                         return x.CompareTo(y);
-                    }
                 }
             }
         }
