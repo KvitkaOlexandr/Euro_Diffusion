@@ -17,7 +17,8 @@ namespace Euro_diffusion
                 Console.WriteLine($"Number of countries should be integer ana belong between {Constants.MIN_COUNTRY_COUNT} and {Constants.MAX_COUNTRY_COUNT}");
                 isNum = int.TryParse(Console.ReadLine(), out countryNumber);
             }
-            Console.WriteLine($"Enter the country description in format 'name xl yl xh yh', where position pointers should be between {Constants.MIN_POS} and {Constants.MAX_POS},  and display lower left and upper right angles of country");
+            Console.WriteLine($"Enter the country description in format 'name xl yl xh yh', where position pointers should be between " +
+                $"{Constants.MIN_POS} and {Constants.MAX_POS},  and display lower left and upper right angles of country");
             var countryList = new List<string[]>();
             for (int i = 0; i < countryNumber; i++)
             {
