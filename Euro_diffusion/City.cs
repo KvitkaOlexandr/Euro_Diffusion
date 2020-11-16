@@ -5,10 +5,6 @@ namespace Euro_diffusion
 {
     public class City
     {
-        public const int INITIAL_BALANCE = 1000000;
-        public const int PAY_PERCENT = 1000;
-        public const int START_INCOME = 0;
-
         public string Country;
         public int X;
         public int Y;
@@ -16,14 +12,14 @@ namespace Euro_diffusion
         public List<City> Neighbors;
         public int CompletionDay;
 
-        public City(string country, int x, int y, int initialBalance = INITIAL_BALANCE)
+        public City(string country, int x, int y, int initialBalance = Constants.INITIAL_BALANCE)
         {
             Country = country;
             X = x;
             Y = y;
             Balance = new Dictionary<string, Money>
             {
-                { country, new Money(initialBalance, START_INCOME) }
+                { country, new Money(initialBalance, Constants.START_INCOME) }
             };
             Neighbors = new List<City>();
             CompletionDay = -1;
@@ -47,9 +43,9 @@ namespace Euro_diffusion
         {
             foreach (KeyValuePair<string, Money> currency in Balance)
             {
-                if (currency.Value.Balance > PAY_PERCENT)
+                if (currency.Value.Balance > Constants.PAY_PERCENT)
                 {
-                    int bill = currency.Value.Balance / PAY_PERCENT;
+                    int bill = currency.Value.Balance / Constants.PAY_PERCENT;
                     foreach (City neighbor in Neighbors)
                     {
                         currency.Value.Balance -= bill;

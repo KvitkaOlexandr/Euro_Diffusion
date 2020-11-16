@@ -13,5 +13,8 @@ namespace Euro_diffusion
         public const int MIN_POS = 1;
         public const int MAX_POS = 10;
         public const int GRID_SIZE = 12;
+        public const int INITIAL_BALANCE = 1000000;
+        public const int PAY_PERCENT = 1000;
+        public const int START_INCOME = 0;
     }
 }
