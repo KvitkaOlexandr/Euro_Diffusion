@@ -66,7 +66,8 @@ namespace Euro_diffusion
 
         public int CompareTo(object obj)
         {
-            if (obj == null) return 1;
+            if (obj == null) 
+                throw new ArgumentException("Object is null");
             if (obj is Country country)
                 return Name.CompareTo(country.Name);
             else
